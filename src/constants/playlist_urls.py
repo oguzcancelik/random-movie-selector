@@ -25,4 +25,7 @@ def get_all_playlists():
 def get_playlist(i):
     if len(URLS) == i:
         return random.choice(URLS)
-    return URLS[i]
+    elif len(URLS) > i:
+        return URLS[i]
+    else:
+        quit()
