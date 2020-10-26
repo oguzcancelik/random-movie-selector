@@ -9,7 +9,6 @@ URLS = [
     "https://trakt.tv/users/xilfneps/lists/all-of-these-films-are-worth-seeing-1400-titles?sort=percentage,asc",
     "https://trakt.tv/users/m4milo/lists/empire-s-500-greatest-movies-of-all-time?sort=rank,asc",
     "https://trakt.tv/users/blazer380/lists/underrated-movies?sort=rank,asc",
-    "https://trakt.tv/users/ohuaithnin/lists/imdb-top-250-movies-1996-2019?sort=title,asc",
     "https://trakt.tv/users/movistapp/lists/animation?sort=rank,asc",
     "https://trakt.tv/users/captainnapalm/lists/1001-greatest-movies-of-all-time",
     "https://trakt.tv/users/xilfneps/lists/genre-drama-4700-titles-1970-2013",

@@ -3,6 +3,7 @@ from constants.playlist_urls import *
 from services.request_service import get_list
 from services.scraping_service import *
 from services.trakt_service import *
+from helpers.terminal_helpers import *
 
 
 def get_playlist_name(url):
@@ -31,6 +32,8 @@ def run():
     percentage_choice = input("\nMin Percentage ({} is default): ".format(DefaultPercentage))
     year_choice = input("\nAfter Year ({} is default): ".format(DefaultYear))
 
+    clear_screen()
+
     playlist_choice = get_default(playlist_choice, DefaultPlaylist)
     percentage_choice = get_default(percentage_choice, DefaultPercentage)
     year_choice = get_default(year_choice, DefaultYear)
@@ -47,22 +50,27 @@ def run():
         playlist_info = extract_playlist(page_content)
         movies = save_movies(movies, playlist_info, playlist_name)
 
-    print('\n' + movies[0][1].title() + '\n')
+    print('\nPlaylist Title:\t' + movies[0][1].title() + '\n')
 
-    movies = list(filter(lambda x: percentage_choice <= int(x[3]) < 100 and year_choice <= int(x[4]), movies))
+    movies = list(filter(
+        lambda x: percentage_choice <= int(x[3]) and year_choice <= int(x[4]) and VoteCount < int(x[8]),
+        movies
+    ))
 
     if not movies:
         print('No movies with more than', percentage_choice - 1, 'percentage in playlist.')
         quit()
 
-    movie_number = 10
-
-    random_movies = random.sample(movies, movie_number if len(movies) > movie_number else len(movies))
+    random_movies = random.sample(movies, MovieCount if len(movies) > MovieCount else len(movies))
     random_movies = sorted(random_movies, key=lambda x: x[3], reverse=True)
 
-    for i in random_movies:
-        print('%{:2} | {:4} {:38} | {}'.format(i[3], i[4], i[6][:38], i[7]))
+    print(HeadTitle)
 
+    for i in random_movies:
+        print('%{:2} | {:4} | {:38} | {:35} | {}'.format(i[3], i[4], i[6][:38], i[7], i[8]))
+
+
+clear_screen()
 
 playlists = get_all_playlists()
 
